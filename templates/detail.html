@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load markdown_extras %}
+
+{% block static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/plaintext.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock static %}
+
+{% block title %}
+<title>記事の詳細</title>
+<hr>
+{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="notification is-{{ item.tag }}">
+    <h2>{{ item.title }}</h2>
+    <hr>
+    <h4>投稿者：{{ item.name }}</h4>
+</div>
+
+<p>画像</p>
+<hr>
+<img src="{{ item.image.url }}" alt="投稿画像">
+
+<p>内容</p>
+<p>{{ item.content|markdown|safe }}</p>
+
+<a href="{% url 'index' %}" class="button is-primary is-outlined">戻る</a>
+{% else %}
+Please Login.
+{% endif %}
+{% endblock content %}

@@ -15,7 +15,7 @@ class ArticleModel(models.Model):
     title = models.CharField(max_length=100)
 
     content = MDTextField()
-    image = models.ImageField(upload_to='')
+    image = models.ImageField(upload_to='', blank=False)
     created_at = models.DateField(verbose_name='作成日', auto_now=True)
 
     def __str__(self):
